@@ -138,6 +138,42 @@ namespace CapaNegocio
             return null;
         }
 
+        //metodo para buscar un producto por su codigo 
+        public List<Productos> BuscarPorCodigo(string codigo)
+        {
+            List<Productos> lista = new List<Productos>();
+
+            using (SqlConnection con = Conexion.ObtenerConexion())
+            {
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT * FROM Productos WHERE Codigo LIKE @codigo + '%'",
+                    con);
+
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(new Productos
+                    {
+                        ProductoID = Convert.ToInt32(dr["ProductoID"]),
+                        Codigo = dr["Codigo"].ToString(),
+                        Nombre = dr["Nombre"].ToString(),
+                        Precio = Convert.ToDecimal(dr["Precio"]),
+                        Costo = Convert.ToDecimal(dr["Costo"]),
+                        Stock = Convert.ToInt32(dr["Stock"]),
+                        StockMinimo = Convert.ToInt32(dr["StockMinimo"])
+                    });
+                }
+            }
+
+            return lista;
+        }
+
+
 
     }
 }

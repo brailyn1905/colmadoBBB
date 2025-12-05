@@ -12,7 +12,13 @@ namespace WinFormsApp1
         private void BtnAbrir_Click(object sender, EventArgs e)
         {
             GestiónInventario ventana = new GestiónInventario();
-            ventana.Show();  
+            ventana.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Ventas ventana = new Ventas();
+            ventana.Show();
         }
     }
 }

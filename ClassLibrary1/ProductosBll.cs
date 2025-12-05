@@ -94,5 +94,13 @@ namespace CapaNegocio
 
             return datos.ObtenerProductoPorId(id);
         }
+
+        
+        // metodo para buscar por codigo
+        public List<Productos> BuscarPorCodigo(string codigo)
+        {
+            codigo = codigo?.Trim() ?? string.Empty;
+            return datos.BuscarPorCodigo(codigo);
+        }
     }
 }
